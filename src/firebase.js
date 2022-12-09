@@ -7,14 +7,13 @@ import { child, get, getDatabase, push, ref, set } from "firebase/database";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyC3XIzoowl2wVgwbKOkVivtd0yC-mNdk8w",
-  authDomain: "semester6movies.firebaseapp.com",
-  databaseURL:
-    "https://semester6movies-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "semester6movies",
-  storageBucket: "semester6movies.appspot.com",
-  messagingSenderId: "320084724018",
-  appId: "1:320084724018:web:ca74e529f5f411e755af2b",
+  apiKey: process.env.REACT_APP_API_KEY_FIREBASE,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN_FIREBASE,
+  databaseURL: process.env.REACT_APP_DATABASE_URL_FIREBASE,
+  projectId: process.env.REACT_APP_PROJECT_ID_FIREBASE,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET_FIREBASE,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID_FIREBASE,
+  appId: process.env.REACT_APP_ID_FIREBASE,
 };
 
 // Initialize Firebase
@@ -41,7 +40,7 @@ export function writeUserData(userId, movieId) {
 }
 
 //get array => [23,23,32,321,3]
-//for each call find picture and actors and 
+//for each call find picture and actors and
 //display data
 
 //make one call to api like give all fav for userID
