@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import {getDatabase, push, ref, set} from "firebase/database";
+import { child, get, getDatabase, push, ref, set } from "firebase/database";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -9,7 +9,8 @@ import {getDatabase, push, ref, set} from "firebase/database";
 const firebaseConfig = {
   apiKey: "AIzaSyC3XIzoowl2wVgwbKOkVivtd0yC-mNdk8w",
   authDomain: "semester6movies.firebaseapp.com",
-  databaseURL: "https://semester6movies-default-rtdb.europe-west1.firebasedatabase.app",
+  databaseURL:
+    "https://semester6movies-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "semester6movies",
   storageBucket: "semester6movies.appspot.com",
   messagingSenderId: "320084724018",
@@ -23,25 +24,37 @@ export default app;
 
 //initialize realtime database
 
-export function writeUserData(userId, movieId)
-{
+export function writeUserData(userId, movieId) {
   const db = getDatabase();
-  try{
-    const usersRef = ref(db,'users/'+userId+'/favourites');
-    const newFavorite=push(usersRef);
-    set(newFavorite ,movieId);
+  try {
+    const usersRef = ref(db, "users/" + userId + "/favorites");
+    const newFavorite = push(usersRef);
+    set(newFavorite, movieId);
 
     // var list =  [movieId];
     // const arrays = ref(db,'arrays/');
     // const newArr=push(arrays);
     // set(newArr ,list);
-    
-  }catch(e){
+  } catch (e) {
     console.trace(e);
-    
   }
-
-
 }
 
+//get array => [23,23,32,321,3]
+//for each call find picture and actors and 
+//display data
 
+//make one call to api like give all fav for userID
+//display
+
+export function getuserFavorites(userId) {
+  const dbref = ref(getDatabase());
+
+  return get(child(dbref, `users/${userId}`)).then((snapshot) => {
+    if (snapshot.exists()) {
+      return Object.values(snapshot.val().favorites);
+    } else {
+      return "no data";
+    }
+  });
+}
