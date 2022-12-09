@@ -1,23 +1,26 @@
-import React from "react";
-import Signin from "./components/Signin";
-import Signup from "./components/Signup";
-import Account from "./components/Account";
+import Signin from "./components/Authentication/Signin";
+import Signup from "./components/Authentication/Signup";
 import { Route, Routes } from "react-router-dom";
 import { AuthContextProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Trending from "./pages/Trending";
+import "./App.css";
+import AppBar from "./components/AppBar";
 
 function App() {
   return (
     <div>
       <AuthContextProvider>
+        <AppBar />
         <Routes>
-          <Route path="/" element={<Signin />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route exact path="/" element={<Signin />} />
+          <Route exact path="/signup" element={<Signup />} />
+
           <Route
-            path="/account"
+            path="/trending"
             element={
               <ProtectedRoute>
-                <Account />
+                <Trending />
               </ProtectedRoute>
             }
           />

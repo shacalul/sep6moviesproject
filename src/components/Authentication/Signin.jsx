@@ -1,23 +1,22 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserAuth } from "../context/AuthContext";
-import "../index.css";
-import authImg from "../assets/authImage.jpg";
+import { UserAuth } from "../../context/AuthContext";
+import authImg from "../../assets/authImage.jpg";
 
-const Signup = () => {
+const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState("");
-  const { createUser } = UserAuth();
   const navigate = useNavigate();
+  const { signIn } = UserAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     try {
-      await createUser(email, password);
-      navigate("/account");
+      await signIn(email, password);
+      navigate("/trending");
     } catch (e) {
       setError(e.message);
       console.log(e.message);
@@ -29,9 +28,10 @@ const Signup = () => {
       <div className="hidden sm:block">
         <img className="w-full h-full object-cover" src={authImg} alt="" />
       </div>
+
       <div className="max-w-[700px] mx-auto my-16 p-4">
         <div>
-          <h1 className="text-2xl font-bold py-2">Sign up for free</h1>
+          <h1 className="text-2xl font-bold py-2">Sign in to your account</h1>
         </div>
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col text-gray-400 py-2">
@@ -51,12 +51,12 @@ const Signup = () => {
             />
           </div>
           <button className="w-full my-5 py-2 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg">
-            Sign Up
+            Sign In
           </button>
           <p className="py-2">
-            Already have an account ?{" "}
-            <Link to="/" className="underline">
-              Sign in.
+            Don't have an account yet?{" "}
+            <Link to="/signup" className="underline">
+              Sign up.
             </Link>
           </p>
         </form>
@@ -65,4 +65,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Signin;
