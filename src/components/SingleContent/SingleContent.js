@@ -1,6 +1,7 @@
 import { img_300, unavailable } from "../Config/Config";
 import "./SingleContent.css";
 import { Badge } from "@mui/material";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 const SingleContent = ({
   id,

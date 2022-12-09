@@ -4,6 +4,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  browserSessionPersistence,
 } from "firebase/auth";
 import { auth } from "../firebase";
 
@@ -17,6 +18,7 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   const signIn = (email, password) => {
+    auth.setPersistence(browserSessionPersistence);
     return signInWithEmailAndPassword(auth, email, password);
   };
 

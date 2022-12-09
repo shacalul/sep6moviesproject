@@ -3,10 +3,10 @@ import Signup from "./components/Authentication/Signup";
 import { Route, Routes } from "react-router-dom";
 import { AuthContextProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Trending from "./pages/Trending";
+import Trending from "./pages/Trending/Trending";
 import "./App.css";
 import AppBar from "./components/AppBar";
-
+import Movies from "./pages/Movies/Movies";
 function App() {
   return (
     <div>
@@ -15,7 +15,14 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Signin />} />
           <Route exact path="/signup" element={<Signup />} />
-
+          <Route
+            path="/movies"
+            element={
+              <ProtectedRoute>
+                <Movies />
+              </ProtectedRoute>
+            }
+          />{" "}
           <Route
             path="/trending"
             element={

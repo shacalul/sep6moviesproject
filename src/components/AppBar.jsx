@@ -4,8 +4,8 @@ import { UserAuth } from "../context/AuthContext";
 
 const AppBar = () => {
   const Links = [
+    { name: "MOVIES", link: "/movies" },
     { name: "TRENDING", link: "/trending" },
-    { name: "MOVIES", link: "/" },
     { name: "FAVOURITE", link: "/" },
   ];
   const { user, logout } = UserAuth();
@@ -20,17 +20,15 @@ const AppBar = () => {
       console.log(e.message);
     }
   };
-  let [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   return user ? (
-    <div className="shadow-md w-full absolute top-0 left-0">
+    <div className="shadow-md w-full relative top-0 left-0">
       <div className="md:flex items-center justify-between bg-white py-4 md:px-10 px-7 ">
         <div
           className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
       text-gray-800"
         >
-          <span className="text-3xl text-indigo-600 mr-1 pt-2">
-            <ion-icon name="logo-ionic"></ion-icon>
-          </span>
+          <span className="text-3xl text-indigo-600 mr-1 pt-2"></span>
           BEST MOVIES INC
         </div>
 

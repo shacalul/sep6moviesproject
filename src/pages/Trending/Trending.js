@@ -1,26 +1,12 @@
 import axios from "axios";
 import "./Trending.css";
 import React, { useEffect, useState } from "react";
-import SingleContent from "../components/SingleContent/SingleContent";
-import CustomPagination from "../components/Pagination/CustomPagination";
-import { useNavigate } from "react-router-dom";
-import { UserAuth } from "../context/AuthContext";
+import SingleContent from "../../components/SingleContent/SingleContent";
+import CustomPagination from "../../components/Pagination/CustomPagination";
 
 const Trending = () => {
   const [page, setPage] = useState(1);
   const [content, setContent] = useState([]);
-  const { user, logout } = UserAuth();
-  const navigate = useNavigate();
-
-  const handleLogout = async () => {
-    try {
-      await logout();
-      navigate("/");
-      console.log("You are logged out");
-    } catch (e) {
-      console.log(e.message);
-    }
-  };
 
   const fetchTrending = async () => {
     const { data } = await axios.get(
