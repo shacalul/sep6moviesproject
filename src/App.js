@@ -7,6 +7,7 @@ import Trending from "./pages/Trending/Trending";
 import "./App.css";
 import AppBar from "./components/AppBar";
 import Movies from "./pages/Movies/Movies";
+import Search from "./pages/Search/Search";
 function App() {
   return (
     <div>
@@ -28,6 +29,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Trending />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/search"
+            element={
+              <ProtectedRoute>
+                <Search />
               </ProtectedRoute>
             }
           />

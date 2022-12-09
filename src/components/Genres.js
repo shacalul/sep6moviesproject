@@ -1,4 +1,4 @@
-import { Chip } from "@mui/material";
+import { Chip, createTheme, ThemeProvider } from "@mui/material";
 import axios from "axios";
 import { useEffect } from "react";
 
@@ -14,6 +14,14 @@ const Genres = ({
     setGenres(genres.filter((g) => g.id !== genre.id));
     setPage(1);
   };
+  const darkTheme = createTheme({
+    palette: {
+      type: "dark",
+      primary: {
+        main: "#fff",
+      },
+    },
+  });
 
   const handleRemove = (genre) => {
     setSelectedGenres(
@@ -41,30 +49,32 @@ const Genres = ({
 
   return (
     <div style={{ padding: "6px 0" }}>
-      {selectedGenres.map((genre) => (
-        <Chip
-          style={{ margin: 2 }}
-          label={genre.name}
-          key={genre.id}
-          color="primary"
-          clickable
-          size="small"
-          onDelete={() => handleRemove(genre)}
-        />
-      ))}
-      {Array.isArray(genres)
-        ? genres.map((genre) => (
-            <Chip
-              style={{ margin: 2 }}
-              label={genre.name}
-              key={genre.id}
-              color="primary"
-              clickable
-              size="small"
-              onClick={() => handleAdd(genre)}
-            />
-          ))
-        : null}
+      <ThemeProvider theme={darkTheme}>
+        {selectedGenres.map((genre) => (
+          <Chip
+            style={{ margin: 2 }}
+            label={genre.name}
+            key={genre.id}
+            color="primary"
+            clickable
+            size="small"
+            onDelete={() => handleRemove(genre)}
+          />
+        ))}
+        {Array.isArray(genres)
+          ? genres.map((genre) => (
+              <Chip
+                style={{ margin: 2 }}
+                label={genre.name}
+                key={genre.id}
+                color="primary"
+                clickable
+                size="small"
+                onClick={() => handleAdd(genre)}
+              />
+            ))
+          : null}
+      </ThemeProvider>
     </div>
   );
 };

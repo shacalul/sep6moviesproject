@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const AppBar = () => {
   const Links = [
     { name: "MOVIES", link: "/movies" },
     { name: "TRENDING", link: "/trending" },
     { name: "FAVOURITE", link: "/" },
+    { name: "SEARCH", link: "/search" },
   ];
   const { user, logout } = UserAuth();
   const navigate = useNavigate();
@@ -54,13 +56,12 @@ const AppBar = () => {
               </a>
             </li>
           ))}
-          <button
+          <LogoutIcon
             onClick={handleLogout}
-            className="bg-indigo-600 text-white font-[Poppins] py-2 px-6 rounded md:ml-8 hover:bg-indigo-400 
-             duration-500"
+            className=" md:ml-8 text-xl md:my-0 my-7 text-gray-800 hover:text-gray-400 duration-500"
           >
             Logout
-          </button>
+          </LogoutIcon>
         </ul>
       </div>
     </div>
