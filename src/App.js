@@ -5,7 +5,6 @@ import { AuthContextProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Trending from "./pages/Trending";
 import "./App.css";
-import Account from "./components/Account";
 import AppBar from "./components/AppBar";
 
 function App() {

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Button from "./Button";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
 
@@ -22,9 +21,9 @@ const AppBar = () => {
     }
   };
   let [open, setOpen] = useState(false);
-  return (
-    <div className="shadow-md w-full fixed top-0 left-0">
-      <div className="md:flex items-center justify-between bg-white py-4 md:px-10 px-7">
+  return user ? (
+    <div className="shadow-md w-full absolute top-0 left-0">
+      <div className="md:flex items-center justify-between bg-white py-4 md:px-10 px-7 ">
         <div
           className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
       text-gray-800"
@@ -57,10 +56,18 @@ const AppBar = () => {
               </a>
             </li>
           ))}
-          <Button onClick={handleLogout}>Logout</Button>
+          <button
+            onClick={handleLogout}
+            className="bg-indigo-600 text-white font-[Poppins] py-2 px-6 rounded md:ml-8 hover:bg-indigo-400 
+             duration-500"
+          >
+            Logout
+          </button>
         </ul>
       </div>
     </div>
+  ) : (
+    ""
   );
 };
 
