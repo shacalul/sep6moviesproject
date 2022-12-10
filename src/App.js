@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import { AuthContextProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Trending from "./pages/Trending/Trending";
+import Favourite from "./pages/Favourite/Favourite";
 import "./App.css";
 import AppBar from "./components/AppBar";
 import Movies from "./pages/Movies/Movies";
@@ -37,6 +38,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Search />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/favourite"
+            element={
+              <ProtectedRoute>
+                <Favourite />
               </ProtectedRoute>
             }
           />

@@ -7,7 +7,7 @@ const AppBar = () => {
   const Links = [
     { name: "MOVIES", link: "/movies" },
     { name: "TRENDING", link: "/trending" },
-    { name: "FAVOURITE", link: "/" },
+    { name: "FAVOURITE", link: "/favourite" },
     { name: "SEARCH", link: "/search" },
   ];
   const { user, logout } = UserAuth();
