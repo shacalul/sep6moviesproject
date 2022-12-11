@@ -1,6 +1,7 @@
-import { auth, getuserFavorites } from "../../firebase";
+import { auth, getuserFavorites,getCurrentUser } from "../../firebase";
 import axios from "axios";
-import { useEffect,useState } from "react";
+import { UserAuth } from "../../context/AuthContext";
+import { useEffect,useState, compo } from "react";
 import SingleContent from "../../components/SingleContent/SingleContent";
 import "./Favourite.css";
 
@@ -8,35 +9,43 @@ const Favourite = () => {
   
   const [content, setContent] = useState();
 
-  const fetchMovies = async () => {
-    const data = await getuserFavorites(auth.currentUser.uid);
-    var moviesArray=[];
-    for (const element of data) {
-      
-        await axios.get(
-        `https://api.themoviedb.org/3/movie/${element}?api_key=${process.env.REACT_APP_API_KEY}&external_source=imdb_id`
-     
-      ).then((res)=>{
-        if(res.status==200){
-          moviesArray.push(res.data);
-        }
+  const fetchFavourites = async () => {
+    if(auth.currentUser){
+      //DDDD
+      const currectUser=await getCurrentUser();
+      const data = await getuserFavorites(currectUser.uid);
+      var moviesArray=[];
+      for (const element of data) {
+        
+          await axios.get(
+          `https://api.themoviedb.org/3/movie/${element}?api_key=${process.env.REACT_APP_API_KEY}&external_source=imdb_id`
        
-      }).catch((e)=>console.log(e));
-      
+        ).then((res)=>{
+          if(res.status==200){
+            moviesArray.push(res.data);
+          }
+         
+        }).catch((e)=>console.log(e));
+        
+      }
+      setContent(moviesArray);
     }
-    setContent(moviesArray);
+    
   };
 
-  // useEffect(() => {
-  //   fetchMovies();
-  // }, []);
+ 
+
+  useEffect(() => {
+   
+    fetchFavourites();
+   
+  }, [UserAuth()]);
+
+
 
   return (
     <div>
-      <button className="bg-violet-300 rounded-md" onClick={fetchMovies}>
-        Add to favourites
-        
-      </button>
+     
       <div className="favourites">
         {content &&
           content.map((c) => (

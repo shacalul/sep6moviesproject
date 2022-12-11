@@ -21,6 +21,9 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export default app;
 
+export function getCurrentUser(){
+  return getAuth(app).currentUser;
+}
 //initialize realtime database
 
 export function writeUserData(userId, movieId) {
