@@ -45,7 +45,7 @@ jobs:
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'SEP6movies'
+        app-name: 'sep6movies'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_07f3c59fe1d44373a4421144e621182d }}
         images: 'sep6movies.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_b6908dd078dc462ea0c27d89a95948c8 }}/hello:${{ github.sha }}'
