@@ -9,11 +9,14 @@ import "./App.css";
 import AppBar from "./components/AppBar";
 import Movies from "./pages/Movies/Movies";
 import Search from "./pages/Search/Search";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function App() {
   return (
     <div>
       <AuthContextProvider>
         <AppBar />
+        <ToastContainer />
         <Routes>
           <Route exact path="/" element={<Signin />} />
           <Route exact path="/signup" element={<Signup />} />

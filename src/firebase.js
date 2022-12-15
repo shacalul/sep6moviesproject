@@ -1,19 +1,21 @@
 // Import the functions you need from the SDKs you need
+
 import { initializeApp } from "firebase/app";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import { child, get, getDatabase, push, ref, set } from "firebase/database";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_API_KEY_FIREBASE,
-  authDomain: process.env.REACT_APP_AUTH_DOMAIN_FIREBASE,
-  databaseURL: process.env.REACT_APP_DATABASE_URL_FIREBASE,
-  projectId: process.env.REACT_APP_PROJECT_ID_FIREBASE,
-  storageBucket: process.env.REACT_APP_STORAGE_BUCKET_FIREBASE,
-  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID_FIREBASE,
-  appId: process.env.REACT_APP_ID_FIREBASE,
+  apiKey: "AIzaSyC3XIzoowl2wVgwbKOkVivtd0yC-mNdk8w",
+  authDomain: "semester6movies.firebaseapp.com",
+  databaseURL:
+    "https://semester6movies-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "semester6movies",
+  storageBucket: "semester6movies.appspot.com",
+  messagingSenderId: "320084724018",
+  appId: "1:320084724018:web:ca74e529f5f411e755af2b",
 };
 
 // Initialize Firebase
@@ -21,7 +23,7 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export default app;
 
-export function getCurrentUser(){
+export function getCurrentUser() {
   return getAuth(app).currentUser;
 }
 //initialize realtime database
@@ -38,6 +40,14 @@ export function writeUserData(userId, movieId) {
     // const arrays = ref(db,'arrays/');
     // const newArr=push(arrays);
     // set(newArr ,list);
+  } catch (e) {
+    console.trace(e);
+  }
+}
+export function deleteUserData() {
+  const db = getDatabase();
+  try {
+    return db.ref("favorites").child("ITEM_KEY").delete();
   } catch (e) {
     console.trace(e);
   }
@@ -61,5 +71,3 @@ export function getuserFavorites(userId) {
     }
   });
 }
-
-

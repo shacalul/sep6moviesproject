@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
 import LogoutIcon from "@mui/icons-material/Logout";
+import MenuIcon from "@mui/icons-material/Menu";
 
 const AppBar = () => {
   const Links = [
@@ -36,14 +37,15 @@ const AppBar = () => {
 
         <div
           onClick={() => setOpen(!open)}
-          className="text-3xl absolute right-8 top-6 cursor-pointer md:hidden"
+          className="absolute top-2 right-2 text-black bg-white-800 hover:text-gray-400  font-small rounded-lg text-lg px-3 py-2 cursor-pointer md:hidden transition-all duration-500 ease-in "
+          type="button"
         >
-          <ion-icon name={open ? "close" : "menu"}></ion-icon>
+          <MenuIcon name={open ? "close" : "menu"}></MenuIcon>
         </div>
 
         <ul
           className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
-            open ? "top-20 " : "top-[-490px]"
+            open ? "top-10 " : "top-[-490px]"
           }`}
         >
           {Links.map((link) => (
@@ -56,12 +58,9 @@ const AppBar = () => {
               </a>
             </li>
           ))}
-          <LogoutIcon
-            onClick={handleLogout}
-            className=" md:ml-8 text-xl md:my-0 my-7 text-gray-800 hover:text-gray-400 duration-500"
-          >
-            Logout
-          </LogoutIcon>
+          <div className=" md:ml-8 text-xl md:my-0 my-7 text-gray-800 hover:text-gray-400 duration-500 transition-all duration-500 ease-in cursor-pointer">
+            <LogoutIcon onClick={handleLogout}>Logout</LogoutIcon>
+          </div>
         </ul>
       </div>
     </div>
