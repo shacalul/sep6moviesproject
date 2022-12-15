@@ -30,7 +30,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: sep6movies.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_b6908dd078dc462ea0c27d89a95948c8 }}/hello:${{ github.sha }}
+        tags: sep6movies.azurecr.io/sep6movies/hello:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
