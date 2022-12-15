@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
+
 import { initializeApp } from "firebase/app";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import { child, get, getDatabase, push, ref, remove, set } from "firebase/database";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -22,7 +23,7 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export default app;
 
-export function getCurrentUser(){
+export function getCurrentUser() {
   return getAuth(app).currentUser;
 }
 //initialize realtime database
@@ -38,6 +39,14 @@ export function writeUserData(userId, movieId) {
     // const arrays = ref(db,'arrays/');
     // const newArr=push(arrays);
     // set(newArr ,list);
+  } catch (e) {
+    console.trace(e);
+  }
+}
+export function deleteUserData() {
+  const db = getDatabase();
+  try {
+    return db.ref("favorites").child("ITEM_KEY").delete();
   } catch (e) {
     console.trace(e);
   }
@@ -61,5 +70,3 @@ export function getuserFavorites(userId) {
     }
   });
 }
-
-

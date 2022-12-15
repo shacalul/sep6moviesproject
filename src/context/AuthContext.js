@@ -7,6 +7,7 @@ import {
   browserSessionPersistence,
 } from "firebase/auth";
 import { auth } from "../firebase";
+import { sendEmailWithNewUser } from "../functionApp";
 
 const UserContext = createContext();
 
@@ -14,6 +15,7 @@ export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
 
   const createUser = (email, password) => {
+    sendEmailWithNewUser(email);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
