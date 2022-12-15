@@ -18,7 +18,7 @@ const Favourite = () => {
       for (const element of data) {
         
           await axios.get(
-          `https://api.themoviedb.org/3/movie/${element}?api_key=${process.env.REACT_APP_API_KEY}&external_source=imdb_id`
+          `https://api.themoviedb.org/3/movie/${element}?api_key=e9803bdbdf280847ae72bf418504e047&external_source=imdb_id`
        
         ).then((res)=>{
           if(res.status==200){
