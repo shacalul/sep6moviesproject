@@ -7,9 +7,10 @@ import { child, get, getDatabase, push, ref, set } from "firebase/database";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyC3XIzoowl2wVgwbKOkVivtd0yC",
+  apiKey: "AIzaSyC3XIzoowl2wVgwbKOkVivtd0yC-mNdk8w",
   authDomain: "semester6movies.firebaseapp.com",
-  databaseURL: "https://semester6movies-default-rtdb.europe-west1.firebasedatabase.app",
+  databaseURL:
+    "https://semester6movies-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "semester6movies",
   storageBucket: "semester6movies.appspot.com",
   messagingSenderId: "320084724018",
