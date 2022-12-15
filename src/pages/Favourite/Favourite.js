@@ -22,7 +22,7 @@ const Favourite = () => {
             `https://api.themoviedb.org/3/movie/${element}?api_key=${process.env.REACT_APP_API_KEY}&external_source=imdb_id`
           )
           .then((res) => {
-            if (res.status == 200) {
+            if (res.status === 200) {
               moviesArray.push(res.data);
             }
           })
