@@ -17,10 +17,9 @@ import {
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyC3XIzoowl2wVgwbKOkVivtd0yC-mNdk8w",
+  apiKey: "AIzaSyC3XIzoowl2wVgwbKOkVivtd0yC",
   authDomain: "semester6movies.firebaseapp.com",
-  databaseURL:
-    "https://semester6movies-default-rtdb.europe-west1.firebasedatabase.app",
+  databaseURL: "https://semester6movies-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "semester6movies",
   storageBucket: "semester6movies.appspot.com",
   messagingSenderId: "320084724018",
