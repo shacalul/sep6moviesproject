@@ -1,25 +1,17 @@
 // Import the functions you need from the SDKs you need
 
-import { Movie } from "@mui/icons-material";
 import { initializeApp } from "firebase/app";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import {
-  child,
-  get,
-  getDatabase,
-  push,
-  ref,
-  set,
-  remove,
-} from "firebase/database";
+import { getAuth } from "firebase/auth";
+import { child, get, getDatabase, push, ref, set } from "firebase/database";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyC3XIzoowl2wVgwbKOkVivtd0yC",
+  apiKey: "AIzaSyC3XIzoowl2wVgwbKOkVivtd0yC-mNdk8w",
   authDomain: "semester6movies.firebaseapp.com",
-  databaseURL: "https://semester6movies-default-rtdb.europe-west1.firebasedatabase.app",
+  databaseURL:
+    "https://semester6movies-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "semester6movies",
   storageBucket: "semester6movies.appspot.com",
   messagingSenderId: "320084724018",

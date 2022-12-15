@@ -7,6 +7,7 @@ import { auth, writeUserData, deleteUserData } from "../../firebase";
 import { useState, useEffect, setEffect } from "react";
 
 import { toast } from "react-toastify";
+
 const SingleContent = ({
   id,
   poster,
