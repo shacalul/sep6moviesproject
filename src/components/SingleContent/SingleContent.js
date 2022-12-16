@@ -18,6 +18,7 @@ const SingleContent = ({
   const [pathname, setPathname] = useState(window.location.pathname);
   const [effect, setEffect] = useState(false);
   const [credits, setCredits] = useState([]);
+  const [cast, setCast] = useState([]);
 
   // This function will be called when the URL path changes
   const handlePathnameChange = () => {
@@ -38,17 +39,18 @@ const SingleContent = ({
         ? "TV Series removed from favourites! \n Please refresh the page!"
         : "Movie removed from favourites! \n Please refresh the page!"
     );
-  const fetchCredits = async () => {
+  const fetchCreditsAndCast = async () => {
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/${media_type}/${id}/credits?api_key=e9803bdbdf280847ae72bf418504e047&language=en-US`
     );
-    setCredits(data.crew.filter(({ job }) => job === "Director"));
+    setCredits(data.crew.filter(({job})=> job ==='Director'));
+    setCast(data.cast);
   };
 
   // Use the useEffect hook to update the URL path state when the pathname changes
   useEffect(() => {
     window.addEventListener("popstate", handlePathnameChange);
-    fetchCredits();
+    fetchCreditsAndCast();
     return () => {
       window.removeEventListener("popstate", handlePathnameChange);
     };
@@ -124,6 +126,14 @@ const SingleContent = ({
           ""
         )}
       </div>
+      <div>Directors: </div>
+      {Array.isArray(credits) ? credits.map((c) => (
+        <b key="{index}">{c.name}</b>
+      )) : null}
+      <div>Cast: </div>
+      {Array.isArray(cast) ? cast.slice(0,5).map((c) => (
+        <b key="{index}">{c.name}</b>
+      )) : null}
     </div>
   );
 };
