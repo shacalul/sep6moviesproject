@@ -2,10 +2,9 @@ import { img_300, unavailable } from "../Config/Config";
 import "./SingleContent.css";
 import { Badge } from "@mui/material";
 import { auth, writeUserData, deleteUserData } from "../../firebase";
-import { useState, useEffect, setEffect } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
-
 
 const SingleContent = ({
   id,
@@ -24,17 +23,26 @@ const SingleContent = ({
   const handlePathnameChange = () => {
     setPathname(window.location.pathname);
   };
-  const notify = () =>
+  const notifyFavouritesAlreadyExists = () =>
+    toast("Movie already in your favourite list! ");
+
+  const notifyAll = () =>
     toast(
       media_type === "tv"
-        ? "TV Series added to favourites!"
-        : "Movie added to favourites!"
+        ? "TV Series added to favourites! "
+        : "Movie added to favourites! "
+    );
+  const notifyFavourites = () =>
+    toast(
+      media_type === "tv"
+        ? "TV Series removed from favourites! \n Please refresh the page!"
+        : "Movie removed from favourites! \n Please refresh the page!"
     );
   const fetchCredits = async () => {
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/${media_type}/${id}/credits?api_key=e9803bdbdf280847ae72bf418504e047&language=en-US`
     );
-    setCredits(data.crew.filter(({job})=> job ==='Director'));
+    setCredits(data.crew.filter(({ job }) => job === "Director"));
   };
 
   // Use the useEffect hook to update the URL path state when the pathname changes
@@ -44,7 +52,7 @@ const SingleContent = ({
     return () => {
       window.removeEventListener("popstate", handlePathnameChange);
     };
-  }, []);
+  });
 
   // Use the pathname state to determine whether to show the button or not
   const showButton = pathname !== "/favourite";
@@ -74,6 +82,14 @@ const SingleContent = ({
         {media_type === "tv" ? "TV Series" : "Movie"}
         <span className="subTitle">{date}</span>
       </span>
+      <div>Directors: </div>
+      {Array.isArray(credits)
+        ? credits.map((c) => (
+            <p className=".media" key="{index}">
+              {c.name}
+            </p>
+          ))
+        : null}
       <div>
         {showButton && (
           <button
@@ -83,7 +99,7 @@ const SingleContent = ({
             onClick={() => {
               AddtoFavs();
               setEffect(true);
-              notify();
+              notifyAll();
             }}
             onAnimationEnd={() => setEffect(false)}
           >
@@ -98,7 +114,7 @@ const SingleContent = ({
             onClick={() => {
               RemoveFromFavs();
               setEffect(true);
-              notify();
+              notifyFavourites();
             }}
             onAnimationEnd={() => setEffect(false)}
           >
@@ -108,10 +124,6 @@ const SingleContent = ({
           ""
         )}
       </div>
-      <div>Directors: </div>
-      {Array.isArray(credits) ? credits.map((c) => (
-        <b key="{index}">{c.name}</b>
-      )) : null}
     </div>
   );
 };
