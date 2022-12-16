@@ -16,6 +16,7 @@ const Favourite = () => {
     if (auth.currentUser) {
       const currectUser = await getCurrentUser();
       const data = await getuserFavorites(currectUser.uid);
+
       var moviesArray = [];
       for (const element of data) {
         await axios
