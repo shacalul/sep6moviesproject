@@ -1,12 +1,11 @@
 import { img_300, unavailable } from "../Config/Config";
 import "./SingleContent.css";
 import { Badge } from "@mui/material";
-
 import { auth, writeUserData, deleteUserData } from "../../firebase";
-
 import { useState, useEffect, setEffect } from "react";
-
 import { toast } from "react-toastify";
+import axios from "axios";
+
 
 const SingleContent = ({
   id,
@@ -19,6 +18,7 @@ const SingleContent = ({
   // Use the useState hook to create a state for the URL path
   const [pathname, setPathname] = useState(window.location.pathname);
   const [effect, setEffect] = useState(false);
+  const [credits, setCredits] = useState([]);
 
   // This function will be called when the URL path changes
   const handlePathnameChange = () => {
@@ -30,9 +30,17 @@ const SingleContent = ({
         ? "TV Series added to favourites!"
         : "Movie added to favourites!"
     );
+  const fetchCredits = async () => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/${media_type}/${id}/credits?api_key=e9803bdbdf280847ae72bf418504e047&language=en-US`
+    );
+    setCredits(data.crew.filter(({job})=> job ==='Director'));
+  };
+
   // Use the useEffect hook to update the URL path state when the pathname changes
   useEffect(() => {
     window.addEventListener("popstate", handlePathnameChange);
+    fetchCredits();
     return () => {
       window.removeEventListener("popstate", handlePathnameChange);
     };
@@ -100,6 +108,10 @@ const SingleContent = ({
           ""
         )}
       </div>
+      <div>Directors: </div>
+      {Array.isArray(credits) ? credits.map((c) => (
+        <b key="{index}">{c.name}</b>
+      )) : null}
     </div>
   );
 };
