@@ -3,13 +3,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import SingleContent from "../../components/SingleContent/SingleContent";
 import "./Favourite.css";
-import CustomPagination from "../../components/Pagination/CustomPagination";
+
 import { UserAuth } from "../../context/AuthContext";
 
 const Favourite = () => {
   const [content, setContent] = useState();
-  const [setPage] = useState(1);
-  const [numOfPages] = useState();
+
   const user = UserAuth();
 
   const fetchFavourites = async () => {
@@ -53,9 +52,6 @@ const Favourite = () => {
             />
           ))}
       </div>
-      {numOfPages > 1 && (
-        <CustomPagination setPage={setPage} numOfPages={numOfPages} />
-      )}
     </div>
   );
 };

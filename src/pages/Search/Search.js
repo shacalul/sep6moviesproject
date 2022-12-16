@@ -25,7 +25,9 @@ const Search = () => {
   const fetchSearch = async () => {
     try {
       const { data } = await axios.get(
-        `https://api.themoviedb.org/3/search/${type ? "tv" : "movie"}?api_key=e9803bdbdf280847ae72bf418504e047&language=en-US&query=${searchText}&page=${page}&include_adult=false`
+        `https://api.themoviedb.org/3/search/${
+          type ? "tv" : "movie"
+        }?api_key=e9803bdbdf280847ae72bf418504e047&language=en-US&query=${searchText}&page=${page}&include_adult=false`
       );
       setContent(data.results);
       setNumOfPages(data.total_pages);
@@ -74,9 +76,7 @@ const Search = () => {
               vote_average={c.vote_average}
             />
           ))}
-        {searchText &&
-          !content &&
-          (type ? <h2>No Series Found</h2> : <h2>No Movies Found</h2>)}
+        {searchText && !content && <h2>No Movies Found</h2>}
       </div>
       {numOfPages > 1 && (
         <CustomPagination setPage={setPage} numOfPages={numOfPages} />
