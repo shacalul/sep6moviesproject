@@ -2,7 +2,16 @@
 
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { child, get, getDatabase, push, ref, set } from "firebase/database";
+import {
+  child,
+  get,
+  getDatabase,
+  push,
+  ref,
+  set,
+  remove,
+} from "firebase/database";
+import { doc, deleteDoc } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -28,37 +37,50 @@ export function getCurrentUser() {
 }
 //initialize realtime database
 
-export function writeUserData(userId, movieId) {
+export async function writeUserData(userId, movieId) {
   const db = getDatabase();
-  try {
-    //const usersRef = ref(db, "users/" + userId + "/favorites");
-    const usersRef = ref(db, "users/" + userId + "/favorites");
-    const newFavorite = push(usersRef);
-    set(newFavorite, movieId);
-
-    // var list =  [movieId];
-    // const arrays = ref(db,'arrays/');
-    // const newArr=push(arrays);
-    // set(newArr ,list);
-  } catch (e) {
-    console.trace(e);
+  const data = await getuserFavorites(userId);
+  let found = false;
+  for (const element of data) {
+    if (element === movieId) {
+      found = true;
+      break;
+    }
   }
-}
-export function deleteUserData() {
-  const db = getDatabase();
-  try {
-    return db.ref("favorites").child("ITEM_KEY").delete();
-  } catch (e) {
-    console.trace(e);
+
+  if (!found) {
+    try {
+      const usersRef = ref(db, "users/" + userId + "/favorites");
+      const newFavorite = push(usersRef);
+      set(newFavorite, movieId);
+    } catch (e) {
+      console.trace(e);
+    }
   }
 }
 
-//get array => [23,23,32,321,3]
-//for each call find picture and actors and
-//display data
+export async function deleteUserData(userId, movieId) {
+  const dbref = ref(getDatabase());
 
-//make one call to api like give all fav for userID
-//display
+  get(child(dbref, `users/${userId}`)).then((snapshot) => {
+    if (snapshot.exists()) {
+      var myKey;
+      const entries = Object.entries(snapshot.val().favorites);
+      for (const [key, value] of entries) {
+        // Check if the value is equal to 55
+        if (value === movieId) {
+          // The key for the value 55 is:
+
+          myKey = key;
+        }
+      }
+      if (myKey !== undefined) {
+        const usersRef = ref(getDatabase(), "users/" + userId + "/favorites");
+        remove(child(usersRef, myKey));
+      }
+    }
+  });
+}
 
 export function getuserFavorites(userId) {
   const dbref = ref(getDatabase());

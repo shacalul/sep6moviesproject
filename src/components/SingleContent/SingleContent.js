@@ -41,12 +41,12 @@ const SingleContent = ({
   // Use the pathname state to determine whether to show the button or not
   const showButton = pathname !== "/favourite";
 
-  const AddtoFavs = () => {
-    writeUserData(auth.currentUser.uid, id);
+  const AddtoFavs = async () => {
+    await writeUserData(auth.currentUser.uid, id);
   };
 
-  const RemoveFromFavs = () => {
-    deleteUserData(auth.currentUser.uid, id);
+  const RemoveFromFavs = async () => {
+    await deleteUserData(auth.currentUser.uid, id);
   };
 
   return (
